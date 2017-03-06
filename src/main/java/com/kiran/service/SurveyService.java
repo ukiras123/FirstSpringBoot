@@ -16,23 +16,14 @@ public class SurveyService {
     private static List<Survey> surveys = new ArrayList<>();
     static {
         Question question1 = new Question("Question1",
-                "Largest Country in the World", "Russia", Arrays.asList(
-                        "India", "Russia", "United States", "China"));
+				"Who is CEO of OCEANX?", "George", Arrays.asList("Kiran", "George", "Barry", "Peter"));
         Question question2 = new Question("Question2",
-                "Most Populus Country in the World", "China", Arrays.asList(
-                        "India", "Russia", "United States", "China"));
-        Question question3 = new Question("Question3",
-                "Highest GDP in the World", "United States", Arrays.asList(
-                        "India", "Russia", "United States", "China"));
-        Question question4 = new Question("Question4",
-                "Second largest english speaking country", "India", Arrays
-                        .asList("India", "Russia", "United States", "China"));
-
+				"Where is OceanX?", "El Segundo", Arrays.asList("El Segundo", "Santa Monica", "SFO", "China"));
         List<Question> questions = new ArrayList<>(Arrays.asList(question1,
-                question2, question3, question4));
+				question2));
 
-        Survey survey = new Survey("Survey1", "My Favorite Survey",
-                "Description of the Survey", questions);
+		Survey survey = new Survey("Survey1", "OceanX Survey",
+				"Lets see what u got?", questions);
 
         surveys.add(survey);
     }
