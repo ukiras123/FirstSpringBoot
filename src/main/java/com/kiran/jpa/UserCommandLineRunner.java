@@ -16,22 +16,21 @@ public class UserCommandLineRunner implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		repository.save(new User("Ranga", "Admin"));
-		repository.save(new User("Ravi", "User"));
-		repository.save(new User("Satish", "Admin"));
-		repository.save(new User("Raghu", "User"));
+		repository.save(new User("kiran", "Admin"));
+		repository.save(new User("user", "User"));
 		
-	
-		for (User user : repository.findAll())
+		log.info(" ____________________Testing CommandLineRunner______________________");
+
+		for (User user : repository.findByRole("User"))
 		{
-			log.info(user.toString());
+			log.info(user.toString() + "PASS: secret");
 		}
-		
-		log.info("ADMIN ______________");
+		log.info(" ______Testing CommandLineRunner (Admin only)________");
 		for(User user : repository.findByRole("Admin"))
 		{
-			log.info(user.toString());
+			log.info(user.toString() + "PASS: password");
 		}
+		log.info(" ________________________________________________________");
 
 	}
 

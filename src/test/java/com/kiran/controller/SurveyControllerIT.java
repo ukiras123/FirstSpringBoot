@@ -40,7 +40,7 @@ public class SurveyControllerIT {
 
 	@Before
 	public void before() {
-		headers.add("Authorization", createHttpAuthenticationHeaderValue("user1", "secret1"));
+		headers.add("Authorization", createHttpAuthenticationHeaderValue("user", "secret"));
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 	}
 
