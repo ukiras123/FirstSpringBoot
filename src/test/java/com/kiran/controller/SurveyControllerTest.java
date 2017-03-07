@@ -25,7 +25,7 @@ import com.kiran.model.Question;
 import com.kiran.service.SurveyService;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(SurveyController.class)
+@WebMvcTest(value = SurveyController.class, secure = false)
 public class SurveyControllerTest {
 
 	@Autowired

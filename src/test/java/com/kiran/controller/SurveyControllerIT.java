@@ -2,6 +2,7 @@ package com.kiran.controller;
 
 import static org.junit.Assert.assertTrue;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.kiran.Application;
@@ -35,12 +37,13 @@ public class SurveyControllerIT {
 
 	HttpHeaders headers = new HttpHeaders();
 
+
 	@Before
 	public void before() {
-
+		headers.add("Authorization", createHttpAuthenticationHeaderValue("user1", "secret1"));
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-
 	}
+
 
 	@Test
 	public void testRetrieveSurveyQuestion() throws JSONException {
@@ -50,7 +53,7 @@ public class SurveyControllerIT {
 		ResponseEntity<String> response = restTemplate.exchange(
 				createURLWithPort("/surveys/Survey1/questions/Question1"), HttpMethod.GET, entity, String.class);
 
-		String expected = "{id:Question1,description:Largest Country in the World,correctAnswer:Russia}";
+		String expected = "{id:Question1}";
 
 		JSONAssert.assertEquals(expected, response.getBody(), false);
 	}
@@ -81,4 +84,10 @@ public class SurveyControllerIT {
 		return "http://localhost:" + port + uri;
 	}
 
+	private String createHttpAuthenticationHeaderValue(String userId, String password) {
+		String auth = userId + ":" + password;
+		byte[] encodedAuth = Base64.encode(auth.getBytes(Charset.forName("US-ASCII")));
+		String headerValue = "Basic " + new String(encodedAuth);
+		return headerValue;
+	}
 }
